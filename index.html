@@ -24,7 +24,7 @@
 <meta property="og:site_name" content="Colectivo Textil Chiconcuac">
 <meta name="twitter:card" content="summary_large_image">
 
-<!-- JSON-LD LocalBusiness -->
+<!-- JSON-LD LocalBusiness + catálogo -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -59,26 +59,32 @@
     "itemListElement": [
       {
         "@type": "Offer",
+        "priceCurrency": "MXN",
+        "price": "950",
         "itemOffered": {
           "@type": "Product",
-          "name": "Suéteres y chalecos de lana virgen",
-          "description": "Prendas clásicas tejidas a mano en microtalleres familiares de Chiconcuac."
+          "name": "Suéter tradicional en lana virgen 100%",
+          "description": "Suéter clásico tejido a mano en microtalleres familiares de Chiconcuac, lana virgen 100%."
         }
       },
       {
         "@type": "Offer",
+        "priceCurrency": "MXN",
+        "price": "1450",
         "itemOffered": {
           "@type": "Product",
-          "name": "Cobijas y sarapes tradicionales",
-          "description": "Textiles con trazabilidad ética, tejidos con técnicas heredadas por generaciones."
+          "name": "Cobija / Sarape artesanal en telar de madera",
+          "description": "Cobija tradicional tejida en telar de madera, con trazabilidad ética de origen."
         }
       },
       {
         "@type": "Offer",
+        "priceCurrency": "MXN",
+        "price": "780",
         "itemOffered": {
           "@type": "Product",
-          "name": "Catálogo corporativo B2B",
-          "description": "Pedidos mayoristas con impacto social directo a las familias productoras."
+          "name": "Chaleco artesanal con detalles geométricos",
+          "description": "Chaleco de lana con patrones geométricos tradicionales, confección 100% artesanal."
         }
       }
     ]
@@ -136,12 +142,14 @@
   img { max-width: 100%; display: block; }
 
   /* Enfoque de teclado visible y diferenciado */
-  a:focus, button:focus, input:focus, [tabindex]:focus {
+  a:focus, button:focus, input:focus, summary:focus, [tabindex]:focus {
     outline: 3px solid var(--focus-ring);
     outline-offset: 3px;
   }
-  a:focus:not(:focus-visible), button:focus:not(:focus-visible) { outline: none; }
-  a:focus-visible, button:focus-visible {
+  a:focus:not(:focus-visible),
+  button:focus:not(:focus-visible),
+  summary:focus:not(:focus-visible) { outline: none; }
+  a:focus-visible, button:focus-visible, summary:focus-visible {
     outline: 3px solid var(--focus-ring);
     outline-offset: 3px;
   }
@@ -220,11 +228,7 @@
     cursor: pointer;
     flex-shrink: 0;
   }
-  .menu-toggle .bars {
-    position: relative;
-    width: 22px;
-    height: 16px;
-  }
+  .menu-toggle .bars { position: relative; width: 22px; height: 16px; }
   .menu-toggle .bars span {
     position: absolute;
     left: 0;
@@ -238,16 +242,9 @@
   .menu-toggle .bars span:nth-child(2) { top: 7px; }
   .menu-toggle .bars span:nth-child(3) { top: 14px; }
 
-  /* Estado abierto: transforma a "X" */
-  .menu-toggle[aria-expanded="true"] .bars span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-  }
-  .menu-toggle[aria-expanded="true"] .bars span:nth-child(2) {
-    opacity: 0;
-  }
-  .menu-toggle[aria-expanded="true"] .bars span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-  }
+  .menu-toggle[aria-expanded="true"] .bars span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .menu-toggle[aria-expanded="true"] .bars span:nth-child(2) { opacity: 0; }
+  .menu-toggle[aria-expanded="true"] .bars span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
   nav.main-nav ul {
     list-style: none;
@@ -272,22 +269,14 @@
   }
   nav.main-nav a:hover { background: var(--color-border); }
 
-  .nav-cta {
-    background: var(--color-accent);
-    color: #fff !important;
-  }
+  .nav-cta { background: var(--color-accent); color: #fff !important; }
   .nav-cta:hover { background: var(--color-accent-dark) !important; }
 
   /* ===== Menú móvil desplegable ===== */
   @media (max-width: 760px) {
     .menu-toggle { display: flex; }
 
-    nav.main-nav {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-    }
+    nav.main-nav { position: absolute; top: 100%; left: 0; right: 0; }
 
     nav.main-nav ul {
       flex-direction: column;
@@ -297,10 +286,8 @@
       border: 1px solid var(--color-border);
       border-top: none;
       border-radius: 0 0 var(--radius) var(--radius);
-      padding: 0.6rem;
       box-shadow: 0 8px 18px rgba(17, 24, 39, 0.12);
 
-      /* Oculto por defecto */
       max-height: 0;
       overflow: hidden;
       padding-top: 0;
@@ -340,11 +327,7 @@
   }
   .hero-content .wrap { width: 100%; }
   .hero h1 { color: #fff; max-width: 18ch; }
-  .hero p.lead {
-    color: #F3F0EA;
-    font-size: 1.15rem;
-    max-width: 50ch;
-  }
+  .hero p.lead { color: #F3F0EA; font-size: 1.15rem; max-width: 50ch; }
 
   .btn {
     display: inline-flex;
@@ -366,12 +349,7 @@
   .btn-outline { background: transparent; color: #fff; border-color: #fff; }
   .btn-outline:hover { background: rgba(255,255,255,0.15); }
 
-  .hero-actions {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-top: 1.6rem;
-  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.6rem; }
 
   /* Secciones generales */
   section { padding: 4rem 0; }
@@ -382,10 +360,10 @@
     border-bottom: 1px solid var(--color-border);
   }
 
-  /* Productos */
+  /* ===== Catálogo de productos (maqueta e-commerce) ===== */
   .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
   }
 
@@ -397,25 +375,112 @@
     display: flex;
     flex-direction: column;
   }
-  article.product-card img { width: 100%; height: 220px; object-fit: cover; }
+  article.product-card img { width: 100%; height: 230px; object-fit: cover; }
+
   .product-body {
     padding: 1.4rem;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
   }
-  .product-body p { margin: 0 0 0.9rem 0; }
-  .product-meta {
-    list-style: none;
-    margin: 0 0 1.2rem 0;
-    padding: 0;
+  .product-body h3 { margin-bottom: 0.3rem; }
+
+  .product-price {
+    font-family: "Trebuchet MS", sans-serif;
+    font-weight: 700;
+    font-size: 1.35rem;
+    color: var(--color-accent-dark);
+    margin: 0 0 1rem 0;
+  }
+  .product-price .currency-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 0.1rem 0.4rem;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+  }
+
+  /* Selector de cantidad accesible */
+  .qty-field {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 1.1rem;
+  }
+  .qty-field label {
+    font-family: "Trebuchet MS", sans-serif;
+    font-weight: 600;
     font-size: 0.92rem;
     color: var(--color-primary);
   }
-  .product-meta li { padding: 0.25rem 0; border-top: 1px solid var(--color-border); }
-  .product-meta li:first-child { border-top: none; }
-  .product-meta strong { color: var(--color-accent-dark); }
-  .product-card .btn { margin-top: auto; align-self: flex-start; }
+  .qty-field input[type="number"] {
+    width: 4.5rem;
+    min-height: 44px;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--color-text);
+    background: var(--color-bg);
+  }
+
+  .btn-buy {
+    width: 100%;
+    background: #25D366;
+    color: #05330f;
+    margin-bottom: 1.4rem;
+  }
+  .btn-buy:hover { background: #1DA851; color: #ffffff; }
+  .btn-buy svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+  /* Bloques desplegables (details/summary) */
+  .product-details {
+    border-top: 1px solid var(--color-border);
+    margin-top: auto;
+  }
+  .product-details details {
+    border-bottom: 1px solid var(--color-border);
+  }
+  .product-details summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    min-height: 44px;
+    padding: 0.7rem 0.2rem;
+    cursor: pointer;
+    font-family: "Trebuchet MS", sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--color-primary);
+    list-style: none;
+  }
+  .product-details summary::-webkit-details-marker { display: none; }
+  .product-details summary::after {
+    content: "+";
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-accent-dark);
+    flex-shrink: 0;
+  }
+  .product-details details[open] summary::after { content: "–"; }
+  .product-details summary:hover { color: var(--color-accent-dark); }
+
+  .product-details .details-content {
+    padding: 0 0.2rem 1rem 0.2rem;
+    font-size: 0.95rem;
+    color: var(--color-text);
+  }
+  .product-details .details-content ul {
+    margin: 0.3rem 0 0 0;
+    padding-left: 1.2rem;
+  }
+  .product-details .details-content li { padding: 0.15rem 0; }
 
   /* Impacto */
   .impact-grid {
@@ -424,20 +489,11 @@
     gap: 2rem;
     margin-top: 2rem;
   }
-  .impact-card {
-    padding: 1.6rem;
-    border-left: 4px solid var(--color-accent);
-    background: var(--color-bg);
-  }
+  .impact-card { padding: 1.6rem; border-left: 4px solid var(--color-accent); background: var(--color-bg); }
   .impact-card h3 { margin-bottom: 0.5rem; }
 
   /* B2B */
-  .b2b {
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: 2.5rem;
-    align-items: center;
-  }
+  .b2b { display: grid; grid-template-columns: 1.1fr 1fr; gap: 2.5rem; align-items: center; }
   .b2b img { border-radius: var(--radius); width: 100%; height: 340px; object-fit: cover; }
   @media (max-width: 760px) {
     .b2b { grid-template-columns: 1fr; }
@@ -451,32 +507,17 @@
   .info-list li { display: flex; gap: 0.8rem; padding: 0.9rem 0; border-bottom: 1px solid var(--color-border); }
   .info-list li:last-child { border-bottom: none; }
   .info-icon { flex-shrink: 0; width: 26px; text-align: center; }
-  .map-frame {
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    min-height: 260px;
-  }
+  .map-frame { border: 1px solid var(--color-border); border-radius: var(--radius); overflow: hidden; min-height: 260px; }
   .map-frame iframe { width: 100%; height: 100%; min-height: 260px; border: 0; }
 
   /* Footer */
   footer.site-footer { background: var(--color-primary); color: #E9E7E2; padding: 3rem 0 1.6rem; }
   footer.site-footer a { color: #F3F0EA; }
-  .footer-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
-  }
+  .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
   footer.site-footer h3 { color: #fff; font-size: 1rem; text-transform: none; }
   footer.site-footer ul { list-style: none; margin: 0; padding: 0; }
   footer.site-footer li { padding: 0.3rem 0; }
-  .footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.15);
-    padding-top: 1.2rem;
-    font-size: 0.9rem;
-    color: #C9C5BB;
-  }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.15); padding-top: 1.2rem; font-size: 0.9rem; color: #C9C5BB; }
 
   /* Botón flotante WhatsApp */
   .whatsapp-float {
@@ -505,6 +546,13 @@
     clip: rect(0,0,0,0);
     white-space: nowrap;
     border: 0;
+  }
+
+  .status-msg {
+    font-size: 0.85rem;
+    color: var(--color-accent-dark);
+    margin: -0.8rem 0 1rem 0;
+    min-height: 1.2em;
   }
 </style>
 </head>
@@ -539,7 +587,7 @@
 <main id="main">
 
   <section class="hero" id="top" aria-label="Presentación">
-    <img class="hero-img" src="https://images.unsplash.com/photo-1544441893-675973e31985?w=1600&h=900&fit=crop&q=80" alt="Artesana tejiendo lana en un telar de madera tradicional en un taller de Chiconcuac">
+    <img class="hero-img" src="https://images.unsplash.com/photo-1544441893-675973e31985?w=1600&h=900&fit=crop&q=80" alt="Artesana tejiendo lana en un telar de madera tradicional en un taller de Chiconcuac" width="1600" height="900">
     <div class="hero-content">
       <div class="wrap">
         <h1>Lana tejida a mano, comercio justo desde el taller a tu hogar</h1>
@@ -552,55 +600,151 @@
     </div>
   </section>
 
+  <!-- ===== CATÁLOGO DE PRODUCTOS (maqueta e-commerce accesible) ===== -->
   <section id="productos" aria-labelledby="productos-titulo">
     <div class="wrap">
       <div class="section-intro">
         <h2 id="productos-titulo">Nuestras prendas</h2>
-        <p>Cada pieza se elabora en microtalleres familiares de Chiconcuac, con lana virgen y técnicas de tejido heredadas por generaciones. Así sabes exactamente qué compras y de dónde viene.</p>
+        <p>Cada pieza se elabora en microtalleres familiares de Chiconcuac, con lana virgen y técnicas de tejido heredadas por generaciones. Revisa el detalle de cada producto, ajusta la cantidad y encarga directo por WhatsApp.</p>
       </div>
 
       <div class="product-grid">
-        <article class="product-card">
-          <img src="https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=600&h=440&fit=crop&q=80" alt="Suéter tejido de lana color café colgado, con textura gruesa de punto tradicional">
+
+        <!-- Producto 1: Suéter -->
+        <article class="product-card" aria-labelledby="prod1-nombre">
+          <img src="https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=600&h=460&fit=crop&q=80" alt="Suéter tejido en lana virgen color café, de punto grueso tradicional, colgado sobre un gancho de madera" width="600" height="460">
           <div class="product-body">
-            <h3>Suéteres y chalecos de lana virgen</h3>
-            <p>Piezas clásicas, cálidas y resistentes, tejidas a mano en microtalleres familiares de la región.</p>
-            <ul class="product-meta">
-              <li><strong>Composición:</strong> 100% lana virgen de oveja</li>
-              <li><strong>Origen:</strong> Microtaller familiar, Chiconcuac de Juárez</li>
-              <li><strong>Precio:</strong> Pactado directo con el artesano, sin intermediarios</li>
-            </ul>
-            <a class="btn btn-primary" href="https://wa.me/525500000000?text=Hola%2C%20me%20interesan%20los%20su%C3%A9teres%20y%20chalecos%20de%20lana." target="_blank" rel="noopener noreferrer">Preguntar precio</a>
+            <h3 id="prod1-nombre">Suéter tradicional en lana virgen 100%</h3>
+            <p class="product-price">$950.00<span class="currency-tag">MXN</span></p>
+
+            <div class="qty-field">
+              <label for="qty-prod1">Cantidad</label>
+              <input type="number" id="qty-prod1" name="qty-prod1" min="1" max="20" value="1" inputmode="numeric">
+            </div>
+
+            <button type="button" class="btn btn-buy" data-product="Suéter de lana virgen" data-qty-input="qty-prod1" data-wa-msg="Hola, me interesa encargar el Suéter de lana virgen 100%, cantidad: {qty}. ¿Me confirman disponibilidad y forma de pago?">
+              <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.5.7 4.8 1.9 6.8L3 29l6.8-2.1c1.9 1.1 4.1 1.7 6.2 1.7 7 0 12.7-5.6 12.7-12.6C28.7 8.6 23 3 16 3zm0 23c-1.9 0-3.8-.5-5.4-1.5l-.4-.2-4 1.2 1.2-3.9-.3-.4C6 19.6 5.3 17.6 5.3 15.6 5.3 9.7 10.1 5 16 5s10.7 4.7 10.7 10.6S21.9 26 16 26z"/></svg>
+              Encargar por WhatsApp
+            </button>
+            <p class="status-msg" id="status-prod1" role="status" aria-live="polite"></p>
+
+            <div class="product-details">
+              <details>
+                <summary>Información del producto</summary>
+                <div class="details-content">
+                  <ul>
+                    <li>Composición: 100% lana virgen de oveja</li>
+                    <li>Cuidado: lavado a mano con agua fría, secar a la sombra</li>
+                    <li>Confección: 100% artesanal, tejido en agujas o telar de cintura</li>
+                  </ul>
+                </div>
+              </details>
+              <details>
+                <summary>Trazabilidad y comercio justo</summary>
+                <div class="details-content">
+                  <p>Tejido en un microtaller familiar de Chiconcuac de Juárez. El precio pactado se paga de forma directa al artesano, sin intermediarios, y un porcentaje se destina al fondo social comunitario del Colectivo.</p>
+                </div>
+              </details>
+              <details>
+                <summary>Política de envíos y devoluciones</summary>
+                <div class="details-content">
+                  <p>Entrega local en 2 a 4 días hábiles; envío foráneo en 5 a 8 días hábiles. Cambios por defecto de fabricación dentro de los primeros 7 días, sin letras pequeñas: solo escríbenos por WhatsApp con tu comprobante.</p>
+                </div>
+              </details>
+            </div>
           </div>
         </article>
 
-        <article class="product-card">
-          <img src="https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=600&h=440&fit=crop&q=80" alt="Cobijas de lana con patrones geométricos tradicionales dobladas y apiladas">
+        <!-- Producto 2: Cobija / Sarape -->
+        <article class="product-card" aria-labelledby="prod2-nombre">
+          <img src="https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=600&h=460&fit=crop&q=80" alt="Cobijas y sarapes de lana con patrones geométricos tradicionales, dobladas y apiladas sobre un telar de madera" width="600" height="460">
           <div class="product-body">
-            <h3>Cobijas y sarapes tradicionales</h3>
-            <p>Textiles cálidos con diseños heredados, tejidos con trazabilidad ética de principio a fin.</p>
-            <ul class="product-meta">
-              <li><strong>Composición:</strong> Lana virgen y algodón mixto</li>
-              <li><strong>Origen:</strong> Talleres artesanales de Chiconcuac</li>
-              <li><strong>Precio:</strong> Directo de taller, sin comisiones de reventa</li>
-            </ul>
-            <a class="btn btn-primary" href="https://wa.me/525500000000?text=Hola%2C%20me%20interesan%20las%20cobijas%20y%20sarapes%20tradicionales." target="_blank" rel="noopener noreferrer">Preguntar precio</a>
+            <h3 id="prod2-nombre">Cobija / Sarape artesanal en telar de madera</h3>
+            <p class="product-price">$1,450.00<span class="currency-tag">MXN</span></p>
+
+            <div class="qty-field">
+              <label for="qty-prod2">Cantidad</label>
+              <input type="number" id="qty-prod2" name="qty-prod2" min="1" max="20" value="1" inputmode="numeric">
+            </div>
+
+            <button type="button" class="btn btn-buy" data-product="Cobija / Sarape artesanal" data-qty-input="qty-prod2" data-wa-msg="Hola, me interesa encargar la Cobija / Sarape artesanal en telar de madera, cantidad: {qty}. ¿Me confirman disponibilidad y forma de pago?">
+              <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.5.7 4.8 1.9 6.8L3 29l6.8-2.1c1.9 1.1 4.1 1.7 6.2 1.7 7 0 12.7-5.6 12.7-12.6C28.7 8.6 23 3 16 3zm0 23c-1.9 0-3.8-.5-5.4-1.5l-.4-.2-4 1.2 1.2-3.9-.3-.4C6 19.6 5.3 17.6 5.3 15.6 5.3 9.7 10.1 5 16 5s10.7 4.7 10.7 10.6S21.9 26 16 26z"/></svg>
+              Encargar por WhatsApp
+            </button>
+            <p class="status-msg" id="status-prod2" role="status" aria-live="polite"></p>
+
+            <div class="product-details">
+              <details>
+                <summary>Información del producto</summary>
+                <div class="details-content">
+                  <ul>
+                    <li>Composición: lana virgen y algodón mixto</li>
+                    <li>Cuidado: lavado a mano con agua fría, secar en tendido a la sombra</li>
+                    <li>Confección: 100% artesanal, tejida en telar de madera tradicional</li>
+                  </ul>
+                </div>
+              </details>
+              <details>
+                <summary>Trazabilidad y comercio justo</summary>
+                <div class="details-content">
+                  <p>Elaborada en talleres artesanales de Chiconcuac de Juárez. El pago se realiza de forma directa al taller de origen, sin intermediarios, y una parte se destina al fondo social comunitario del Colectivo.</p>
+                </div>
+              </details>
+              <details>
+                <summary>Política de envíos y devoluciones</summary>
+                <div class="details-content">
+                  <p>Entrega local en 2 a 4 días hábiles; envío foráneo en 5 a 8 días hábiles. Cambios por defecto de fabricación dentro de los primeros 7 días, sin letras pequeñas: solo escríbenos por WhatsApp con tu comprobante.</p>
+                </div>
+              </details>
+            </div>
           </div>
         </article>
 
-        <article class="product-card">
-          <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=600&h=440&fit=crop&q=80" alt="Madejas de estambre de lana de distintos colores tierra en un mostrador de taller textil">
+        <!-- Producto 3: Chaleco -->
+        <article class="product-card" aria-labelledby="prod3-nombre">
+          <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=600&h=460&fit=crop&q=80" alt="Chaleco de lana artesanal con detalles geométricos tejidos en tonos tierra, extendido sobre una mesa de taller" width="600" height="460">
           <div class="product-body">
-            <h3>Catálogo corporativo B2B</h3>
-            <p>Pedidos por mayoreo para tiendas, marcas y proyectos con causa, con impacto social medible.</p>
-            <ul class="product-meta">
-              <li><strong>Composición:</strong> Variable según pedido y línea</li>
-              <li><strong>Origen:</strong> Red de talleres integrados del Colectivo</li>
-              <li><strong>Precio:</strong> Tarifa mayorista con precio justo garantizado</li>
-            </ul>
-            <a class="btn btn-primary" href="https://wa.me/525500000000?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20cat%C3%A1logo%20corporativo%20B2B." target="_blank" rel="noopener noreferrer">Solicitar catálogo B2B</a>
+            <h3 id="prod3-nombre">Chaleco artesanal con detalles geométricos</h3>
+            <p class="product-price">$780.00<span class="currency-tag">MXN</span></p>
+
+            <div class="qty-field">
+              <label for="qty-prod3">Cantidad</label>
+              <input type="number" id="qty-prod3" name="qty-prod3" min="1" max="20" value="1" inputmode="numeric">
+            </div>
+
+            <button type="button" class="btn btn-buy" data-product="Chaleco artesanal geométrico" data-qty-input="qty-prod3" data-wa-msg="Hola, me interesa encargar el Chaleco artesanal con detalles geométricos, cantidad: {qty}. ¿Me confirman disponibilidad y forma de pago?">
+              <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.5.7 4.8 1.9 6.8L3 29l6.8-2.1c1.9 1.1 4.1 1.7 6.2 1.7 7 0 12.7-5.6 12.7-12.6C28.7 8.6 23 3 16 3zm0 23c-1.9 0-3.8-.5-5.4-1.5l-.4-.2-4 1.2 1.2-3.9-.3-.4C6 19.6 5.3 17.6 5.3 15.6 5.3 9.7 10.1 5 16 5s10.7 4.7 10.7 10.6S21.9 26 16 26z"/></svg>
+              Encargar por WhatsApp
+            </button>
+            <p class="status-msg" id="status-prod3" role="status" aria-live="polite"></p>
+
+            <div class="product-details">
+              <details>
+                <summary>Información del producto</summary>
+                <div class="details-content">
+                  <ul>
+                    <li>Composición: 100% lana, hilado y teñido artesanal</li>
+                    <li>Cuidado: lavado a mano con agua fría, secar a la sombra</li>
+                    <li>Confección: 100% artesanal, patrones geométricos tejidos a mano</li>
+                  </ul>
+                </div>
+              </details>
+              <details>
+                <summary>Trazabilidad y comercio justo</summary>
+                <div class="details-content">
+                  <p>Confeccionado en un taller artesanal de Chiconcuac de Juárez. El precio pactado se paga directo a la familia tejedora, sin intermediarios, y un porcentaje alimenta el fondo social comunitario del Colectivo.</p>
+                </div>
+              </details>
+              <details>
+                <summary>Política de envíos y devoluciones</summary>
+                <div class="details-content">
+                  <p>Entrega local en 2 a 4 días hábiles; envío foráneo en 5 a 8 días hábiles. Cambios por defecto de fabricación dentro de los primeros 7 días, sin letras pequeñas: solo escríbenos por WhatsApp con tu comprobante.</p>
+                </div>
+              </details>
+            </div>
           </div>
         </article>
+
       </div>
     </div>
   </section>
@@ -636,7 +780,7 @@
         <p>Cuéntanos volumen, temporada y presupuesto, y te enviamos una cotización personalizada por WhatsApp.</p>
         <a class="btn btn-primary" href="https://wa.me/525500000000?text=Hola%2C%20represento%20una%20empresa%20y%20quiero%20informaci%C3%B3n%20sobre%20pedidos%20mayoristas." target="_blank" rel="noopener noreferrer">Solicitar cotización mayorista</a>
       </div>
-      <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=800&h=600&fit=crop&q=80" alt="Rollos de tela y prendas de lana terminadas listas para empaque en un taller textil">
+      <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=800&h=600&fit=crop&q=80" alt="Rollos de tela y prendas de lana terminadas listas para empaque en un taller textil" width="800" height="600">
     </div>
   </section>
 
@@ -713,6 +857,7 @@
 
 <script>
   (function () {
+    /* Menú móvil desplegable */
     var toggle = document.getElementById('menu-toggle');
     var nav = document.getElementById('main-nav');
 
@@ -720,34 +865,56 @@
       nav.classList.remove('is-open');
       toggle.setAttribute('aria-expanded', 'false');
     }
-
     function openMenu() {
       nav.classList.add('is-open');
       toggle.setAttribute('aria-expanded', 'true');
     }
-
     toggle.addEventListener('click', function () {
       var isOpen = toggle.getAttribute('aria-expanded') === 'true';
       isOpen ? closeMenu() : openMenu();
     });
-
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
         closeMenu();
         toggle.focus();
       }
     });
-
     nav.addEventListener('click', function (e) {
       if (e.target.tagName === 'A' && window.matchMedia('(max-width: 760px)').matches) {
         closeMenu();
       }
     });
-
     window.addEventListener('resize', function () {
       if (!window.matchMedia('(max-width: 760px)').matches) {
         closeMenu();
       }
+    });
+
+    /* Botones "Encargar por WhatsApp" con cantidad dinámica */
+    var whatsappNumber = '525500000000';
+    var buyButtons = document.querySelectorAll('.btn-buy');
+
+    buyButtons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var qtyInputId = btn.getAttribute('data-qty-input');
+        var qtyInput = document.getElementById(qtyInputId);
+        var qty = qtyInput ? parseInt(qtyInput.value, 10) : 1;
+
+        if (!qty || qty < 1) { qty = 1; }
+        if (qtyInput) { qtyInput.value = qty; }
+
+        var template = btn.getAttribute('data-wa-msg');
+        var message = template.replace('{qty}', qty);
+        var url = 'https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(message);
+
+        var statusId = 'status-' + qtyInputId.replace('qty-', '');
+        var statusEl = document.getElementById(statusId);
+        if (statusEl) {
+          statusEl.textContent = 'Abriendo WhatsApp para tu pedido de ' + qty + ' pieza(s)...';
+        }
+
+        window.open(url, '_blank', 'noopener,noreferrer');
+      });
     });
   })();
 </script>
