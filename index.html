@@ -140,6 +140,11 @@
             font-size: 1.0625rem;
         }
 
+        /* Bloquea el scroll mientras se muestra el preloader */
+        body.is-loading {
+            overflow: hidden;
+        }
+
         h1,
         h2,
         h3,
@@ -220,6 +225,77 @@
             max-width: var(--max-width);
             margin: 0 auto;
             padding: 0 1.5rem;
+        }
+
+        /* ===== Pantalla de carga (preloader) ===== */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            background: var(--color-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.4s ease;
+        }
+
+        .preloader-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.1rem;
+        }
+
+        .preloader-logo {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: var(--color-accent);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: "Trebuchet MS", sans-serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+            position: relative;
+        }
+
+        /* Anillo animado alrededor del logo */
+        .preloader-logo::before {
+            content: "";
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 3px solid var(--color-border);
+            border-top-color: var(--color-accent-dark);
+            animation: preloader-spin 1s linear infinite;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .preloader-logo::before {
+                animation: none;
+            }
+        }
+
+        @keyframes preloader-spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .preloader-text {
+            font-family: "Trebuchet MS", sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--color-primary);
+            margin: 0;
+        }
+
+        /* Estado oculto: se desvanece y se retira de la interacción */
+        #preloader.is-hidden {
+            opacity: 0;
+            pointer-events: none;
         }
 
         /* Header */
@@ -838,7 +914,15 @@
     </style>
 </head>
 
-<body>
+<body class="is-loading">
+
+    <!-- ===== Pantalla de carga ===== -->
+    <div id="preloader" role="status" aria-live="polite">
+        <div class="preloader-inner">
+            <div class="preloader-logo" aria-hidden="true">CT</div>
+            <p class="preloader-text">Cargando Colectivo Textil Chiconcuac…</p>
+        </div>
+    </div>
 
     <a href="#main" class="skip-link">Saltar al contenido principal</a>
 
@@ -1204,6 +1288,29 @@
 
     <script>
         (function () {
+            /* ===== Pantalla de carga ===== */
+            var preloader = document.getElementById('preloader');
+            var body = document.body;
+
+            function hidePreloader() {
+                if (!preloader) return;
+                preloader.classList.add('is-hidden');
+                body.classList.remove('is-loading');
+                // Se retira del DOM tras la transición para liberar recursos
+                // y evitar que quede un elemento inactivo en el árbol de accesibilidad.
+                window.setTimeout(function () {
+                    if (preloader && preloader.parentNode) {
+                        preloader.parentNode.removeChild(preloader);
+                    }
+                }, 450);
+            }
+
+            // Oculta cuando la página termina de cargar (imágenes incluidas)
+            window.addEventListener('load', hidePreloader);
+
+            // Tiempo máximo de espera por si algún recurso tarda demasiado
+            window.setTimeout(hidePreloader, 3000);
+
             /* Menú móvil desplegable */
             var toggle = document.getElementById('menu-toggle');
             var nav = document.getElementById('main-nav');
