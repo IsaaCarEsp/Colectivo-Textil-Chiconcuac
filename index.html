@@ -575,37 +575,98 @@
             border-bottom: 1px solid var(--color-border);
         }
 
-        /* ===== Catálogo de productos (maqueta e-commerce) ===== */
+        /* ===== Catálogo de productos (ficha e-commerce tipo Amazon/MercadoLibre) ===== */
         .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
         }
 
         article.product-card {
             background: var(--color-surface);
             border: 1px solid var(--color-border);
             border-radius: var(--radius);
-            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .product-layout {
+            display: grid;
+            grid-template-columns: minmax(240px, 380px) 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        @media (max-width: 760px) {
+            .product-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Galería: imagen principal + miniaturas */
+        .product-gallery {
             display: flex;
             flex-direction: column;
         }
 
-        article.product-card img {
+        .gallery-main {
             width: 100%;
-            height: 230px;
+            aspect-ratio: 1 / 1;
             object-fit: cover;
+            border-radius: var(--radius);
+            border: 1px solid var(--color-border);
         }
 
+        .gallery-thumbs {
+            display: flex;
+            gap: 0.6rem;
+            margin-top: 0.8rem;
+            list-style: none;
+            padding: 0;
+        }
+
+        .gallery-thumbs button {
+            width: 64px;
+            height: 64px;
+            padding: 0;
+            border: 2px solid var(--color-border);
+            border-radius: 4px;
+            overflow: hidden;
+            background: none;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .gallery-thumbs button[aria-pressed="true"] {
+            border-color: var(--color-accent);
+        }
+
+        .gallery-thumbs button img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-description-short {
+            margin-top: 1rem;
+            font-size: 0.92rem;
+            color: var(--color-text);
+        }
+
+        /* Columna de información del producto */
         .product-body {
-            padding: 1.4rem;
             display: flex;
             flex-direction: column;
-            flex-grow: 1;
         }
 
         .product-body h3 {
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .product-origin {
+            font-size: 0.85rem;
+            color: #4B5563;
+            margin: 0 0 0.9rem 0;
         }
 
         .product-price {
@@ -988,175 +1049,314 @@
 
                     <!-- Producto 1: Suéter -->
                     <article class="product-card" aria-labelledby="prod1-nombre">
-                        <img src="https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=600&h=460&fit=crop&q=80"
-                            alt="Suéter tejido en lana virgen color café, de punto grueso tradicional, colgado sobre un gancho de madera"
-                            width="600" height="460">
-                        <div class="product-body">
-                            <h3 id="prod1-nombre">Suéter tradicional en lana virgen 100%</h3>
-                            <p class="product-price">$950.00<span class="currency-tag">MXN</span></p>
+                        <div class="product-layout">
 
-                            <div class="qty-field">
-                                <label for="qty-prod1">Cantidad</label>
-                                <input type="number" id="qty-prod1" name="qty-prod1" min="1" max="20" value="1"
-                                    inputmode="numeric">
+                            <div class="product-gallery">
+                                <img class="gallery-main" id="gallery-main-prod1"
+                                    src="https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=700&h=700&fit=crop&q=80"
+                                    alt="Suéter tejido en lana virgen color café, de punto grueso tradicional, colgado sobre un gancho de madera"
+                                    width="700" height="700">
+
+                                <ul class="gallery-thumbs"
+                                    aria-label="Miniaturas del Suéter tradicional en lana virgen 100%">
+                                    <li>
+                                        <button type="button" data-gallery="prod1"
+                                            data-full="https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=700&h=700&fit=crop&q=80"
+                                            data-alt="Suéter tejido en lana virgen color café, de punto grueso tradicional, colgado sobre un gancho de madera"
+                                            aria-pressed="true" aria-label="Ver foto 1 del suéter, prenda completa">
+                                            <img src="https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=120&h=120&fit=crop&q=80"
+                                                alt="" width="120" height="120">
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button" data-gallery="prod1"
+                                            data-full="https://images.unsplash.com/photo-1544441893-675973e31985?w=700&h=700&fit=crop&q=80"
+                                            data-alt="Artesana tejiendo lana en telar de madera, proceso de confección del suéter"
+                                            aria-pressed="false"
+                                            aria-label="Ver foto 2 del suéter, proceso de tejido en el taller">
+                                            <img src="https://images.unsplash.com/photo-1544441893-675973e31985?w=120&h=120&fit=crop&q=80"
+                                                alt="" width="120" height="120">
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button" data-gallery="prod1"
+                                            data-full="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=700&h=700&fit=crop&q=80"
+                                            data-alt="Prendas de lana terminadas y dobladas, listas para entrega, incluyendo suéteres"
+                                            aria-pressed="false"
+                                            aria-label="Ver foto 3 del suéter, prenda terminada lista para entrega">
+                                            <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=120&h=120&fit=crop&q=80"
+                                                alt="" width="120" height="120">
+                                        </button>
+                                    </li>
+                                </ul>
+
+                                <p class="product-description-short">Suéter clásico de manga larga, tejido a mano punto
+                                    por punto en microtalleres familiares. Abriga sin pesar y mejora con cada lavado.
+                                </p>
                             </div>
 
-                            <button type="button" class="btn btn-buy" data-product="Suéter de lana virgen"
-                                data-qty-input="qty-prod1"
-                                data-wa-msg="Hola, me interesa encargar el Suéter de lana virgen 100%, cantidad: {qty}. ¿Me confirman disponibilidad y forma de pago?">
-                                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-                                    focusable="false">
-                                    <path fill="currentColor"
-                                        d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.5.7 4.8 1.9 6.8L3 29l6.8-2.1c1.9 1.1 4.1 1.7 6.2 1.7 7 0 12.7-5.6 12.7-12.6C28.7 8.6 23 3 16 3zm0 23c-1.9 0-3.8-.5-5.4-1.5l-.4-.2-4 1.2 1.2-3.9-.3-.4C6 19.6 5.3 17.6 5.3 15.6 5.3 9.7 10.1 5 16 5s10.7 4.7 10.7 10.6S21.9 26 16 26z" />
-                                </svg>
-                                Encargar por WhatsApp
-                            </button>
-                            <p class="status-msg" id="status-prod1" role="status" aria-live="polite"></p>
+                            <div class="product-body">
+                                <h3 id="prod1-nombre">Suéter tradicional en lana virgen 100%</h3>
+                                <p class="product-origin">Taller artesanal · Chiconcuac de Juárez, Edo. Méx.</p>
+                                <p class="product-price">$950.00<span class="currency-tag">MXN</span></p>
 
-                            <div class="product-details">
-                                <details>
-                                    <summary>Información del producto</summary>
-                                    <div class="details-content">
-                                        <ul>
-                                            <li>Composición: 100% lana virgen de oveja</li>
-                                            <li>Cuidado: lavado a mano con agua fría, secar a la sombra</li>
-                                            <li>Confección: 100% artesanal, tejido en agujas o telar de cintura</li>
-                                        </ul>
-                                    </div>
-                                </details>
-                                <details>
-                                    <summary>Trazabilidad y comercio justo</summary>
-                                    <div class="details-content">
-                                        <p>Tejido en un microtaller familiar de Chiconcuac de Juárez. El precio pactado
-                                            se paga de forma directa al artesano, sin intermediarios, y un porcentaje se
-                                            destina al fondo social comunitario del Colectivo.</p>
-                                    </div>
-                                </details>
-                                <details>
-                                    <summary>Política de envíos y devoluciones</summary>
-                                    <div class="details-content">
-                                        <p>Entrega local en 2 a 4 días hábiles; envío foráneo en 5 a 8 días hábiles.
-                                            Cambios por defecto de fabricación dentro de los primeros 7 días, sin letras
-                                            pequeñas: solo escríbenos por WhatsApp con tu comprobante.</p>
-                                    </div>
-                                </details>
+                                <div class="qty-field">
+                                    <label for="qty-prod1">Cantidad</label>
+                                    <input type="number" id="qty-prod1" name="qty-prod1" min="1" max="20" value="1"
+                                        inputmode="numeric">
+                                </div>
+
+                                <button type="button" class="btn btn-buy" data-product="Suéter de lana virgen"
+                                    data-qty-input="qty-prod1"
+                                    data-wa-msg="Hola, me interesa encargar el Suéter de lana virgen 100%, cantidad: {qty}. ¿Me confirman disponibilidad y forma de pago?">
+                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                        focusable="false">
+                                        <path fill="currentColor"
+                                            d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.5.7 4.8 1.9 6.8L3 29l6.8-2.1c1.9 1.1 4.1 1.7 6.2 1.7 7 0 12.7-5.6 12.7-12.6C28.7 8.6 23 3 16 3zm0 23c-1.9 0-3.8-.5-5.4-1.5l-.4-.2-4 1.2 1.2-3.9-.3-.4C6 19.6 5.3 17.6 5.3 15.6 5.3 9.7 10.1 5 16 5s10.7 4.7 10.7 10.6S21.9 26 16 26z" />
+                                    </svg>
+                                    Encargar por WhatsApp
+                                </button>
+                                <p class="status-msg" id="status-prod1" role="status" aria-live="polite"></p>
+
+                                <div class="product-details">
+                                    <details>
+                                        <summary>Información del producto</summary>
+                                        <div class="details-content">
+                                            <ul>
+                                                <li>Composición: 100% lana virgen de oveja</li>
+                                                <li>Cuidado: lavado a mano con agua fría, secar a la sombra</li>
+                                                <li>Confección: 100% artesanal, tejido en agujas o telar de cintura</li>
+                                            </ul>
+                                        </div>
+                                    </details>
+                                    <details>
+                                        <summary>Trazabilidad y comercio justo</summary>
+                                        <div class="details-content">
+                                            <p>Tejido en un microtaller familiar de Chiconcuac de Juárez. El precio
+                                                pactado se paga de forma directa al artesano, sin intermediarios, y un
+                                                porcentaje se destina al fondo social comunitario del Colectivo.</p>
+                                        </div>
+                                    </details>
+                                    <details>
+                                        <summary>Política de envíos y devoluciones</summary>
+                                        <div class="details-content">
+                                            <p>Entrega local en 2 a 4 días hábiles; envío foráneo en 5 a 8 días hábiles.
+                                                Cambios por defecto de fabricación dentro de los primeros 7 días, sin
+                                                letras pequeñas: solo escríbenos por WhatsApp con tu comprobante.</p>
+                                        </div>
+                                    </details>
+                                </div>
                             </div>
+
                         </div>
                     </article>
 
                     <!-- Producto 2: Cobija / Sarape -->
                     <article class="product-card" aria-labelledby="prod2-nombre">
-                        <img src="https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=600&h=460&fit=crop&q=80"
-                            alt="Cobijas y sarapes de lana con patrones geométricos tradicionales, dobladas y apiladas sobre un telar de madera"
-                            width="600" height="460">
-                        <div class="product-body">
-                            <h3 id="prod2-nombre">Cobija / Sarape artesanal en telar de madera</h3>
-                            <p class="product-price">$1,450.00<span class="currency-tag">MXN</span></p>
+                        <div class="product-layout">
 
-                            <div class="qty-field">
-                                <label for="qty-prod2">Cantidad</label>
-                                <input type="number" id="qty-prod2" name="qty-prod2" min="1" max="20" value="1"
-                                    inputmode="numeric">
+                            <div class="product-gallery">
+                                <img class="gallery-main" id="gallery-main-prod2"
+                                    src="https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=700&h=700&fit=crop&q=80"
+                                    alt="Cobijas y sarapes de lana con patrones geométricos tradicionales, dobladas y apiladas sobre un telar de madera"
+                                    width="700" height="700">
+
+                                <ul class="gallery-thumbs"
+                                    aria-label="Miniaturas de la Cobija / Sarape artesanal en telar de madera">
+                                    <li>
+                                        <button type="button" data-gallery="prod2"
+                                            data-full="https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=700&h=700&fit=crop&q=80"
+                                            data-alt="Cobijas y sarapes de lana con patrones geométricos tradicionales, dobladas y apiladas sobre un telar de madera"
+                                            aria-pressed="true" aria-label="Ver foto 1 de la cobija, piezas apiladas">
+                                            <img src="https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=120&h=120&fit=crop&q=80"
+                                                alt="" width="120" height="120">
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button" data-gallery="prod2"
+                                            data-full="https://images.unsplash.com/photo-1544441893-675973e31985?w=700&h=700&fit=crop&q=80"
+                                            data-alt="Artesana tejiendo en telar de madera tradicional, proceso de confección de la cobija"
+                                            aria-pressed="false"
+                                            aria-label="Ver foto 2 de la cobija, proceso de tejido en telar">
+                                            <img src="https://images.unsplash.com/photo-1544441893-675973e31985?w=120&h=120&fit=crop&q=80"
+                                                alt="" width="120" height="120">
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button" data-gallery="prod2"
+                                            data-full="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=700&h=700&fit=crop&q=80"
+                                            data-alt="Rollos de tela y prendas de lana terminadas, listas para empaque y entrega"
+                                            aria-pressed="false"
+                                            aria-label="Ver foto 3 de la cobija, pieza terminada lista para entrega">
+                                            <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=120&h=120&fit=crop&q=80"
+                                                alt="" width="120" height="120">
+                                        </button>
+                                    </li>
+                                </ul>
+
+                                <p class="product-description-short">Cobija cálida de uso diario o de exhibición, tejida
+                                    en telar de madera con patrones geométricos heredados de generación en generación.
+                                </p>
                             </div>
 
-                            <button type="button" class="btn btn-buy" data-product="Cobija / Sarape artesanal"
-                                data-qty-input="qty-prod2"
-                                data-wa-msg="Hola, me interesa encargar la Cobija / Sarape artesanal en telar de madera, cantidad: {qty}. ¿Me confirman disponibilidad y forma de pago?">
-                                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-                                    focusable="false">
-                                    <path fill="currentColor"
-                                        d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.5.7 4.8 1.9 6.8L3 29l6.8-2.1c1.9 1.1 4.1 1.7 6.2 1.7 7 0 12.7-5.6 12.7-12.6C28.7 8.6 23 3 16 3zm0 23c-1.9 0-3.8-.5-5.4-1.5l-.4-.2-4 1.2 1.2-3.9-.3-.4C6 19.6 5.3 17.6 5.3 15.6 5.3 9.7 10.1 5 16 5s10.7 4.7 10.7 10.6S21.9 26 16 26z" />
-                                </svg>
-                                Encargar por WhatsApp
-                            </button>
-                            <p class="status-msg" id="status-prod2" role="status" aria-live="polite"></p>
+                            <div class="product-body">
+                                <h3 id="prod2-nombre">Cobija / Sarape artesanal en telar de madera</h3>
+                                <p class="product-origin">Taller artesanal · Chiconcuac de Juárez, Edo. Méx.</p>
+                                <p class="product-price">$1,450.00<span class="currency-tag">MXN</span></p>
 
-                            <div class="product-details">
-                                <details>
-                                    <summary>Información del producto</summary>
-                                    <div class="details-content">
-                                        <ul>
-                                            <li>Composición: lana virgen y algodón mixto</li>
-                                            <li>Cuidado: lavado a mano con agua fría, secar en tendido a la sombra</li>
-                                            <li>Confección: 100% artesanal, tejida en telar de madera tradicional</li>
-                                        </ul>
-                                    </div>
-                                </details>
-                                <details>
-                                    <summary>Trazabilidad y comercio justo</summary>
-                                    <div class="details-content">
-                                        <p>Elaborada en talleres artesanales de Chiconcuac de Juárez. El pago se realiza
-                                            de forma directa al taller de origen, sin intermediarios, y una parte se
-                                            destina al fondo social comunitario del Colectivo.</p>
-                                    </div>
-                                </details>
-                                <details>
-                                    <summary>Política de envíos y devoluciones</summary>
-                                    <div class="details-content">
-                                        <p>Entrega local en 2 a 4 días hábiles; envío foráneo en 5 a 8 días hábiles.
-                                            Cambios por defecto de fabricación dentro de los primeros 7 días, sin letras
-                                            pequeñas: solo escríbenos por WhatsApp con tu comprobante.</p>
-                                    </div>
-                                </details>
+                                <div class="qty-field">
+                                    <label for="qty-prod2">Cantidad</label>
+                                    <input type="number" id="qty-prod2" name="qty-prod2" min="1" max="20" value="1"
+                                        inputmode="numeric">
+                                </div>
+
+                                <button type="button" class="btn btn-buy" data-product="Cobija / Sarape artesanal"
+                                    data-qty-input="qty-prod2"
+                                    data-wa-msg="Hola, me interesa encargar la Cobija / Sarape artesanal en telar de madera, cantidad: {qty}. ¿Me confirman disponibilidad y forma de pago?">
+                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                        focusable="false">
+                                        <path fill="currentColor"
+                                            d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.5.7 4.8 1.9 6.8L3 29l6.8-2.1c1.9 1.1 4.1 1.7 6.2 1.7 7 0 12.7-5.6 12.7-12.6C28.7 8.6 23 3 16 3zm0 23c-1.9 0-3.8-.5-5.4-1.5l-.4-.2-4 1.2 1.2-3.9-.3-.4C6 19.6 5.3 17.6 5.3 15.6 5.3 9.7 10.1 5 16 5s10.7 4.7 10.7 10.6S21.9 26 16 26z" />
+                                    </svg>
+                                    Encargar por WhatsApp
+                                </button>
+                                <p class="status-msg" id="status-prod2" role="status" aria-live="polite"></p>
+
+                                <div class="product-details">
+                                    <details>
+                                        <summary>Información del producto</summary>
+                                        <div class="details-content">
+                                            <ul>
+                                                <li>Composición: lana virgen y algodón mixto</li>
+                                                <li>Cuidado: lavado a mano con agua fría, secar en tendido a la sombra
+                                                </li>
+                                                <li>Confección: 100% artesanal, tejida en telar de madera tradicional
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </details>
+                                    <details>
+                                        <summary>Trazabilidad y comercio justo</summary>
+                                        <div class="details-content">
+                                            <p>Elaborada en talleres artesanales de Chiconcuac de Juárez. El pago se
+                                                realiza de forma directa al taller de origen, sin intermediarios, y una
+                                                parte se destina al fondo social comunitario del Colectivo.</p>
+                                        </div>
+                                    </details>
+                                    <details>
+                                        <summary>Política de envíos y devoluciones</summary>
+                                        <div class="details-content">
+                                            <p>Entrega local en 2 a 4 días hábiles; envío foráneo en 5 a 8 días hábiles.
+                                                Cambios por defecto de fabricación dentro de los primeros 7 días, sin
+                                                letras pequeñas: solo escríbenos por WhatsApp con tu comprobante.</p>
+                                        </div>
+                                    </details>
+                                </div>
                             </div>
+
                         </div>
                     </article>
 
                     <!-- Producto 3: Chaleco -->
                     <article class="product-card" aria-labelledby="prod3-nombre">
-                        <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=600&h=460&fit=crop&q=80"
-                            alt="Chaleco de lana artesanal con detalles geométricos tejidos en tonos tierra, extendido sobre una mesa de taller"
-                            width="600" height="460">
-                        <div class="product-body">
-                            <h3 id="prod3-nombre">Chaleco artesanal con detalles geométricos</h3>
-                            <p class="product-price">$780.00<span class="currency-tag">MXN</span></p>
+                        <div class="product-layout">
 
-                            <div class="qty-field">
-                                <label for="qty-prod3">Cantidad</label>
-                                <input type="number" id="qty-prod3" name="qty-prod3" min="1" max="20" value="1"
-                                    inputmode="numeric">
+                            <div class="product-gallery">
+                                <img class="gallery-main" id="gallery-main-prod3"
+                                    src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=700&h=700&fit=crop&q=80"
+                                    alt="Chaleco de lana artesanal con detalles geométricos tejidos en tonos tierra, extendido sobre una mesa de taller"
+                                    width="700" height="700">
+
+                                <ul class="gallery-thumbs"
+                                    aria-label="Miniaturas del Chaleco artesanal con detalles geométricos">
+                                    <li>
+                                        <button type="button" data-gallery="prod3"
+                                            data-full="https://images.unsplash.com/photo-1445205170230-053b83016050?w=700&h=700&fit=crop&q=80"
+                                            data-alt="Chaleco de lana artesanal con detalles geométricos tejidos en tonos tierra, extendido sobre una mesa de taller"
+                                            aria-pressed="true" aria-label="Ver foto 1 del chaleco, prenda extendida">
+                                            <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=120&h=120&fit=crop&q=80"
+                                                alt="" width="120" height="120">
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button" data-gallery="prod3"
+                                            data-full="https://images.unsplash.com/photo-1544441893-675973e31985?w=700&h=700&fit=crop&q=80"
+                                            data-alt="Artesana tejiendo lana en telar de madera, proceso de confección del chaleco"
+                                            aria-pressed="false"
+                                            aria-label="Ver foto 2 del chaleco, proceso de tejido en el taller">
+                                            <img src="https://images.unsplash.com/photo-1544441893-675973e31985?w=120&h=120&fit=crop&q=80"
+                                                alt="" width="120" height="120">
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button" data-gallery="prod3"
+                                            data-full="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=700&h=700&fit=crop&q=80"
+                                            data-alt="Prendas de lana terminadas y dobladas, listas para entrega, incluyendo chalecos"
+                                            aria-pressed="false"
+                                            aria-label="Ver foto 3 del chaleco, prenda terminada lista para entrega">
+                                            <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=120&h=120&fit=crop&q=80"
+                                                alt="" width="120" height="120">
+                                        </button>
+                                    </li>
+                                </ul>
+
+                                <p class="product-description-short">Chaleco versátil de lana con patrones geométricos
+                                    tejidos a mano, ideal para entretiempo. Combina fácil sobre camisas o vestidos.</p>
                             </div>
 
-                            <button type="button" class="btn btn-buy" data-product="Chaleco artesanal geométrico"
-                                data-qty-input="qty-prod3"
-                                data-wa-msg="Hola, me interesa encargar el Chaleco artesanal con detalles geométricos, cantidad: {qty}. ¿Me confirman disponibilidad y forma de pago?">
-                                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-                                    focusable="false">
-                                    <path fill="currentColor"
-                                        d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.5.7 4.8 1.9 6.8L3 29l6.8-2.1c1.9 1.1 4.1 1.7 6.2 1.7 7 0 12.7-5.6 12.7-12.6C28.7 8.6 23 3 16 3zm0 23c-1.9 0-3.8-.5-5.4-1.5l-.4-.2-4 1.2 1.2-3.9-.3-.4C6 19.6 5.3 17.6 5.3 15.6 5.3 9.7 10.1 5 16 5s10.7 4.7 10.7 10.6S21.9 26 16 26z" />
-                                </svg>
-                                Encargar por WhatsApp
-                            </button>
-                            <p class="status-msg" id="status-prod3" role="status" aria-live="polite"></p>
+                            <div class="product-body">
+                                <h3 id="prod3-nombre">Chaleco artesanal con detalles geométricos</h3>
+                                <p class="product-origin">Taller artesanal · Chiconcuac de Juárez, Edo. Méx.</p>
+                                <p class="product-price">$780.00<span class="currency-tag">MXN</span></p>
 
-                            <div class="product-details">
-                                <details>
-                                    <summary>Información del producto</summary>
-                                    <div class="details-content">
-                                        <ul>
-                                            <li>Composición: 100% lana, hilado y teñido artesanal</li>
-                                            <li>Cuidado: lavado a mano con agua fría, secar a la sombra</li>
-                                            <li>Confección: 100% artesanal, patrones geométricos tejidos a mano</li>
-                                        </ul>
-                                    </div>
-                                </details>
-                                <details>
-                                    <summary>Trazabilidad y comercio justo</summary>
-                                    <div class="details-content">
-                                        <p>Confeccionado en un taller artesanal de Chiconcuac de Juárez. El precio
-                                            pactado se paga directo a la familia tejedora, sin intermediarios, y un
-                                            porcentaje alimenta el fondo social comunitario del Colectivo.</p>
-                                    </div>
-                                </details>
-                                <details>
-                                    <summary>Política de envíos y devoluciones</summary>
-                                    <div class="details-content">
-                                        <p>Entrega local en 2 a 4 días hábiles; envío foráneo en 5 a 8 días hábiles.
-                                            Cambios por defecto de fabricación dentro de los primeros 7 días, sin letras
-                                            pequeñas: solo escríbenos por WhatsApp con tu comprobante.</p>
-                                    </div>
-                                </details>
+                                <div class="qty-field">
+                                    <label for="qty-prod3">Cantidad</label>
+                                    <input type="number" id="qty-prod3" name="qty-prod3" min="1" max="20" value="1"
+                                        inputmode="numeric">
+                                </div>
+
+                                <button type="button" class="btn btn-buy" data-product="Chaleco artesanal geométrico"
+                                    data-qty-input="qty-prod3"
+                                    data-wa-msg="Hola, me interesa encargar el Chaleco artesanal con detalles geométricos, cantidad: {qty}. ¿Me confirman disponibilidad y forma de pago?">
+                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                        focusable="false">
+                                        <path fill="currentColor"
+                                            d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.5.7 4.8 1.9 6.8L3 29l6.8-2.1c1.9 1.1 4.1 1.7 6.2 1.7 7 0 12.7-5.6 12.7-12.6C28.7 8.6 23 3 16 3zm0 23c-1.9 0-3.8-.5-5.4-1.5l-.4-.2-4 1.2 1.2-3.9-.3-.4C6 19.6 5.3 17.6 5.3 15.6 5.3 9.7 10.1 5 16 5s10.7 4.7 10.7 10.6S21.9 26 16 26z" />
+                                    </svg>
+                                    Encargar por WhatsApp
+                                </button>
+                                <p class="status-msg" id="status-prod3" role="status" aria-live="polite"></p>
+
+                                <div class="product-details">
+                                    <details>
+                                        <summary>Información del producto</summary>
+                                        <div class="details-content">
+                                            <ul>
+                                                <li>Composición: 100% lana, hilado y teñido artesanal</li>
+                                                <li>Cuidado: lavado a mano con agua fría, secar a la sombra</li>
+                                                <li>Confección: 100% artesanal, patrones geométricos tejidos a mano</li>
+                                            </ul>
+                                        </div>
+                                    </details>
+                                    <details>
+                                        <summary>Trazabilidad y comercio justo</summary>
+                                        <div class="details-content">
+                                            <p>Confeccionado en un taller artesanal de Chiconcuac de Juárez. El precio
+                                                pactado se paga directo a la familia tejedora, sin intermediarios, y un
+                                                porcentaje alimenta el fondo social comunitario del Colectivo.</p>
+                                        </div>
+                                    </details>
+                                    <details>
+                                        <summary>Política de envíos y devoluciones</summary>
+                                        <div class="details-content">
+                                            <p>Entrega local en 2 a 4 días hábiles; envío foráneo en 5 a 8 días hábiles.
+                                                Cambios por defecto de fabricación dentro de los primeros 7 días, sin
+                                                letras pequeñas: solo escríbenos por WhatsApp con tu comprobante.</p>
+                                        </div>
+                                    </details>
+                                </div>
                             </div>
+
                         </div>
                     </article>
 
@@ -1342,6 +1542,24 @@
                 if (!window.matchMedia('(max-width: 760px)').matches) {
                     closeMenu();
                 }
+            });
+
+            /* Galería de miniaturas por producto */
+            var thumbButtons = document.querySelectorAll('.gallery-thumbs button');
+
+            thumbButtons.forEach(function (thumb) {
+                thumb.addEventListener('click', function () {
+                    var group = thumb.getAttribute('data-gallery');
+                    var mainImg = document.getElementById('gallery-main-' + group);
+                    if (!mainImg) return;
+
+                    mainImg.src = thumb.getAttribute('data-full');
+                    mainImg.alt = thumb.getAttribute('data-alt');
+
+                    document.querySelectorAll('.gallery-thumbs button[data-gallery="' + group + '"]').forEach(function (btn) {
+                        btn.setAttribute('aria-pressed', btn === thumb ? 'true' : 'false');
+                    });
+                });
             });
 
             /* Botones "Encargar por WhatsApp" con cantidad dinámica */
